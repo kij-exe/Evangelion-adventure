@@ -6,20 +6,20 @@ class Menu:
 		#	general setup
 		self.active = True
 		self.display_surface = pygame.display.get_surface()
-		self.background = pygame.image.load("smth.png").convert_alpha()
+		self.background = pygame.image.load("../smth.png").convert_alpha()
 		self.background = pygame.transform.rotozoom(self.background, 0, SCREEN_WIDTH/1920)
 		
 		self.buttons = [
 		Button("Singleplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 120),
 			self.switch_off),
 		Button("Multiplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 50),
-			print, "not finished yet")
+			print, "xyi")
 		]
 
 	def switch_off(self):
 		self.active = False
 
-	def update(self):
+	def run(self):
 		self.display_surface.blit(self.background, (0,0))
 		for button in self.buttons:
 			button.update(self.display_surface)
@@ -44,7 +44,7 @@ class Button:
 		self.bottom_colour = "Black"
 
 		#	text
-		self.font = pygame.font.Font("fonts/brokenled-2.ttf", 25)
+		self.font = pygame.font.Font("../fonts/brokenled-2.ttf", 25)
 		self.text_surf = self.font.render(text, True, "White")
 		self.text_rect = self.text_surf.get_rect(center=self.top_rect.center)
 

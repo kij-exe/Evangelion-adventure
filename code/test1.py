@@ -1,0 +1,1 @@
+print(list(filter(lambda x: x > 5, [1, 2, 5, 6, 7])))

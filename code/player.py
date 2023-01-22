@@ -4,11 +4,12 @@ from config import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, toggle_debug_mode):
-        super().__init__(group)
+    def __init__(self, pos, group, characters, collision_sprites, toggle_debug_mode, obj_name):
+        super().__init__(group, characters)
 
         #   general setup
-        self.import_assets()
+        self.obj_name = obj_name
+        self.import_assets(obj_name)
         self.status = "down"
         self.frame_index = 0
 
@@ -19,19 +20,20 @@ class Player(pygame.sprite.Sprite):
         self.keys = pygame.key.get_pressed()
 
         #   movement direction
-        self.direction = pygame.math.Vector2((1,1))
+        self.direction = pygame.math.Vector2(0, 0)
         self.pos = pygame.math.Vector2(self.rect.center)
         self.speed = 200
 
         #   collisions
         self.hitbox = self.rect.copy().inflate((-self.rect.width * 0.3, -self.rect.height * 0.6))
         self.collision_sprites = collision_sprites
+        self.characters = characters
 
-    def import_assets(self):
+    def import_assets(self, obj_name):
         self.animations = {"up": [], "down": [], "right": [], "left": [],
                            "up_idle": [], "down_idle": [], "left_idle": [], "right_idle": []}
         for animation in self.animations.keys():
-            path = "graphics/characters/shinji_ikari/" + animation
+            path = f"../graphics/characters/{obj_name}/" + animation
             self.animations[animation] = import_folder(path)
 
     def animate(self, dt):
@@ -39,12 +41,6 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         if self.frame_index >= len(self.animations[self.status]): self.frame_index = 0
         self.image = self.animations[self.status][int(self.frame_index)]
-
-    def dvd(self, dt):
-        if self.rect.left < 0 or self.rect.right > 1280:
-            self.direction.x *= -1
-        if self.rect.top < 0 or self.rect.bottom > 720:
-            self.direction.y *= -1
 
     def get_status(self):
         if not self.direction.magnitude():
@@ -80,7 +76,8 @@ class Player(pygame.sprite.Sprite):
 
 
     def collision(self, direction):
-        for sprite in self.collision_sprites.sprites():
+        collidabale_chars = [a for a in self.characters.sprites() if a.obj_name != self.obj_name]
+        for sprite in self.collision_sprites.sprites() + collidabale_chars:
             if sprite.hitbox.colliderect(self.hitbox):
                 if direction == "horizontal":
                     if self.direction.x > 0:
@@ -115,7 +112,6 @@ class Player(pygame.sprite.Sprite):
         self.collision("vertical")
 
     def update(self, dt):
-        self.input()
-        #   self.dvd(dt)
+        #   self.input()
         self.move(dt)
         self.animate(dt)

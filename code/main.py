@@ -26,10 +26,11 @@ class Game:
                         self.menu.switch_off()
 
             if self.menu.active:
-                self.menu.update()
+                self.menu.run()
             else:
                  self.level.run(dt)
 
+            #   self.clock.tick(120)
             pygame.display.update()
 
 
