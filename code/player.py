@@ -4,7 +4,7 @@ from config import *
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, characters, collision_sprites, toggle_debug_mode, obj_name):
+    def __init__(self, pos, group, characters, collision_sprites, input_functions, obj_name):
         super().__init__(group, characters)
 
         #   general setup
@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(center=pos)
         self.z = LAYERS["main"]
-        self.toggle_debug_mode = toggle_debug_mode
+        self.input_functions = input_functions
         self.keys = pygame.key.get_pressed()
 
         #   movement direction
@@ -72,7 +72,9 @@ class Player(pygame.sprite.Sprite):
 
         #   toggling debug mode
         if self.keys[pygame.K_y] and not self.prev_keys[pygame.K_y]:
-            self.toggle_debug_mode()
+            self.input_functions["toggle_debug_mode"]()
+        if self.keys[pygame.K_v] and not self.prev_keys[pygame.K_v]:
+            self.input_functions["switch_player"]()
 
 
     def collision(self, direction):

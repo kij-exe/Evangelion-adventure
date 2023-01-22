@@ -14,6 +14,7 @@ class Level:
         self.all_sprites = CameraGroup()
         self.collision_sprites = CollisionGroup()
         self.characters = pygame.sprite.Group()
+        self.player_index = 0
 
         self.offset = pygame.Vector2()
 
@@ -38,6 +39,11 @@ class Level:
                 groups=self.all_sprites,
                 z=LAYERS["main"])
 
+        input_functions = {
+        "toggle_debug_mode": self.toggle_debug_mode,
+        "switch_player": self.switch_player
+        }
+
         #   initialization of playable characters
         for obj in main_map.get_layer_by_name("characters"):
             match obj.name:
@@ -47,7 +53,7 @@ class Level:
                         group=self.all_sprites,
                         characters=self.characters, 
                         collision_sprites=self.collision_sprites,
-                        toggle_debug_mode=self.toggle_debug_mode,
+                        input_functions=input_functions,
                         obj_name=obj.name)
                     self.offset = pygame.Vector2(obj.x - SCREEN_WIDTH//2, obj.y - SCREEN_HEIGHT//2)
                
@@ -57,7 +63,7 @@ class Level:
                         group=self.all_sprites,
                         characters=self.characters,
                         collision_sprites=self.collision_sprites,
-                        toggle_debug_mode=self.toggle_debug_mode,
+                        input_functions=input_functions,
                         obj_name=obj.name)
 
         #   objects
@@ -76,7 +82,7 @@ class Level:
 
         self.font = pygame.font.SysFont("comicsansms", 24)
 
-        self.current_player = self.player1
+        self.current_player = self.characters.sprites()[self.player_index]
 
     def show_fps(self, dt):
         fps = round(1 / dt) if dt else -1
@@ -87,6 +93,12 @@ class Level:
 
     def toggle_debug_mode(self):
         self.debug_mode_active = not self.debug_mode_active
+
+    def switch_player(self):
+        self.current_player.direction = pygame.math.Vector2(0, 0)
+        self.player_index += 1
+        self.player_index %= len(self.characters.sprites())
+        self.current_player = self.characters.sprites()[self.player_index]
 
     def calculated_offset(self, dt):
         #   not smooth camera
@@ -136,7 +148,16 @@ class CollisionGroup(pygame.sprite.Group):
         super().__init__()
         self.display_surface = pygame.display.get_surface()
 
+    def draw_alpha_rect(self, rect, colour):
+        surf = pygame.Surface((rect.width, rect.height))
+        surf_rect = surf.get_rect(topleft=rect.topleft)
+        surf.set_alpha(128)
+        surf.fill(colour)
+        self.display_surface.blit(surf, surf_rect)
+
     def custom_draw(self, offset, players):
         for sprite in self.sprites() + players.sprites():
             offset_rect = sprite.hitbox.move(-offset.x, -offset.y)
-            pygame.draw.rect(self.display_surface, "Black", offset_rect)
+
+            self.draw_alpha_rect(offset_rect, "Green")
+            #   pygame.draw.rect(self.display_surface, "Black", offset_rect)
