@@ -13,7 +13,7 @@ class Menu:
 		Button("Singleplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 120),
 			self.switch_off),
 		Button("Multiplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 50),
-			print, "xyi")
+			print, "not finished yet")
 		]
 
 	def switch_off(self):
@@ -69,7 +69,7 @@ class Button:
 			if self.keys[0]:
 				self.actual_shift = 0
 				if not self.prev_keys[0]:
-					self.func(self.args) if self.args else self.func()
+					self.func(self.args[0]) if self.args else self.func()
 			else:
 				self.actual_shift = self.shift				
 		else:

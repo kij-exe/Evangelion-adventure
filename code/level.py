@@ -82,7 +82,7 @@ class Level:
 
         self.font = pygame.font.SysFont("comicsansms", 24)
 
-        self.current_player = self.characters.sprites()[self.player_index]
+        self.current_player = self.player1
 
     def show_fps(self, dt):
         fps = round(1 / dt) if dt else -1

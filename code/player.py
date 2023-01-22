@@ -74,6 +74,7 @@ class Player(pygame.sprite.Sprite):
         if self.keys[pygame.K_y] and not self.prev_keys[pygame.K_y]:
             self.input_functions["toggle_debug_mode"]()
         if self.keys[pygame.K_v] and not self.prev_keys[pygame.K_v]:
+            print(self.keys[pygame.K_v], self.prev_keys[pygame.K_v])
             self.input_functions["switch_player"]()
 
 
@@ -96,6 +97,7 @@ class Player(pygame.sprite.Sprite):
                         self.hitbox.top = sprite.hitbox.bottom
                     self.rect.centery = self.hitbox.centery
                     self.pos.y = self.hitbox.centery
+
     def move(self, dt):
 
         #   normalizing the vector to maintain the same speed in any directions
