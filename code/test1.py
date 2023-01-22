@@ -1,1 +1,9 @@
-print(list(filter(lambda x: x > 5, [1, 2, 5, 6, 7])))
+import subprocesswd
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+install("matplotlib")
+
+import matplotlib

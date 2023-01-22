@@ -1,4 +1,13 @@
-import pygame, sys, time
+import sys
+import subprocess
+
+try:
+    import pygame, pytmx
+except ModuleNotFoundError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pygame"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pytmx"])
+
+import pygame, time
 from level import Level
 from menu import Menu
 from config import *
