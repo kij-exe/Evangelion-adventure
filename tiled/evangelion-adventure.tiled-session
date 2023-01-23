@@ -1,0 +1,85 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tsx/building_1.tsx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "C:/Users/User/Desktop/Evangelion adventure/tiled/tsx/all_tiled2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tmx/main_map.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 3183.333333333333,
+                "y": 3012.121212121212
+            }
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tsx/all_tiled.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tsx/all_tiled2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tsx/buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tsx/collisions.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tsx/objects.tsx": {
+            "scaleInDock": 1
+        },
+        "tmx/main_map.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 2443,
+                "y": 2416
+            }
+        },
+        "tsx/building_1.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tsx/ground.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/User/Desktop/Mykyta/projects/tiled/tileset_images",
+    "map.height": 100,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 100,
+    "openFiles": [
+        "tmx/main_map.tmx",
+        "tsx/ground.tsx",
+        "tsx/building_1.tsx"
+    ],
+    "project": "evangelion-adventure.tiled-project",
+    "recentFiles": [
+        "tmx/main_map.tmx",
+        "tsx/ground.tsx",
+        "tsx/building_1.tsx",
+        "C:/Users/User/Desktop/Mykyta/projects/Evangelion-adventure/tiled/tmx/main_map.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 128,
+        "width": 128
+    },
+    "tileset.type": 1
+}

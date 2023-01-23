@@ -35,7 +35,7 @@ class Button:
 
 		#	click sound
 		self.click_sound = pygame.mixer.Sound("../audio/dota_2_meep_merp.mp3")
-		self.click_sound.set_volume(1)
+		self.click_sound.set_volume(0.5)
 
 		#	top rectangle
 		pos = (pos[0] - width/2, pos[1] - height/2)

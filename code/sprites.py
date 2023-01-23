@@ -9,12 +9,9 @@ class Generic_sprite(pygame.sprite.Sprite):
         self.z = z
         self.hitbox = self.rect.copy().inflate((-self.rect.width * 0, -self.rect.height * 0))
 
-class Object(Generic_sprite):
-    def __init__(self, pos, surf, groups, z=LAYERS["main"]):
-        super().__init__(
-            pos=pos,
-            surf=surf,
-            groups=groups,
-            z=z)
-        self.rect = self.image.get_rect(center=pos)
-        self.hitbox = self.rect.copy().inflate((-self.rect.width * 0.3, -self.rect.height * 0.6))
+class Collision_object(pygame.sprite.Sprite):
+    def __init__(self, pos, dimensions, groups):
+        super().__init__(groups)
+        self.image = pygame.Surface(dimensions)
+        self.rect = self.image.get_rect(topleft=pos)
+        self.hitbox = self.rect.copy()

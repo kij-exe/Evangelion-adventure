@@ -1,6 +1,6 @@
 import pygame
 from player import Player
-from sprites import Generic_sprite, Object
+from sprites import Generic_sprite, Collision_object
 from config import *
 from pytmx.util_pygame import load_pygame
 import sys
@@ -34,7 +34,7 @@ class Level:
                 z=LAYERS["ground"])
 
         #   buildings
-        for x, y, surf in main_map.get_layer_by_name("tile_buildings").tiles():
+        for x, y, surf in main_map.get_layer_by_name("building_tiled").tiles():
             Generic_sprite(
                 pos=(x * 64, (y+1) * 64),
                 surf=surf,
@@ -69,10 +69,10 @@ class Level:
                         obj_name=obj.name)
 
         #   collisions
-        for x, y, surf in main_map.get_layer_by_name("collisions").tiles():
-            Generic_sprite(
-                pos=(x * 64, (y+1) * 64),
-                surf=pygame.Surface((64, 64)),
+        for obj in main_map.get_layer_by_name("collisions"):
+            Collision_object(
+                pos=(obj.x, obj.y),
+                dimensions=(obj.width, obj.height),
                 groups=self.collision_sprites)
 
         self.font = pygame.font.SysFont("comicsansms", 24)
