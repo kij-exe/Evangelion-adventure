@@ -33,6 +33,10 @@ class Button:
 		self.shift = 6
 		self.actual_shift = 6
 
+		#	click sound
+		self.click_sound = pygame.mixer.Sound("../audio/dota_2_meep_merp.mp3")
+		self.click_sound.set_volume(1)
+
 		#	top rectangle
 		pos = (pos[0] - width/2, pos[1] - height/2)
 		self.pos = pos
@@ -69,6 +73,7 @@ class Button:
 			if self.keys[0]:
 				self.actual_shift = 0
 				if not self.prev_keys[0]:
+					self.click_sound.play()
 					self.func(self.args[0]) if self.args else self.func()
 			else:
 				self.actual_shift = self.shift				

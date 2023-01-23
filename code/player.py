@@ -46,35 +46,33 @@ class Player(pygame.sprite.Sprite):
         if not self.direction.magnitude():
             self.status = self.status.split("_")[0] + "_idle"
 
-    def input(self):
-        self.prev_keys = self.keys
-        self.keys = pygame.key.get_pressed()
-
+    def input(self, keys, prev_keys):
         #   vertical movemment
-        if self.keys[pygame.K_w]:
+        if keys[pygame.K_w]:
             self.direction.y = -1
             self.status = "up"
-        elif self.keys[pygame.K_s]:
+        elif keys[pygame.K_s]:
             self.direction.y = 1
             self.status = "down"
         else:
             self.direction.y = 0
 
         #   horizontal movement
-        if self.keys[pygame.K_d]:
+        if keys[pygame.K_d]:
             self.direction.x = 1
             self.status = "right"
-        elif self.keys[pygame.K_a]:
+        elif keys[pygame.K_a]:
             self.direction.x = -1
             self.status = "left"
         else:
             self.direction.x = 0
 
-        #   toggling debug mode
-        if self.keys[pygame.K_y] and not self.prev_keys[pygame.K_y]:
+        #   debug mode control
+        if keys[pygame.K_y] and not prev_keys[pygame.K_y]:
             self.input_functions["toggle_debug_mode"]()
-        if self.keys[pygame.K_v] and not self.prev_keys[pygame.K_v]:
-            print(self.keys[pygame.K_v], self.prev_keys[pygame.K_v])
+
+        #   switch player control
+        if keys[pygame.K_v] and not prev_keys[pygame.K_v]:
             self.input_functions["switch_player"]()
 
 

@@ -18,6 +18,8 @@ class Level:
 
         self.offset = pygame.Vector2()
 
+        self.keys = pygame.key.get_pressed()
+
         self.setup()
 
     def setup(self):
@@ -65,13 +67,6 @@ class Level:
                         collision_sprites=self.collision_sprites,
                         input_functions=input_functions,
                         obj_name=obj.name)
-
-        #   objects
-        for obj in main_map.get_layer_by_name("objects"):
-            Object(
-                pos=(obj.x, obj.y + 64),
-                surf=obj.image,
-                groups=(self.all_sprites, self.collision_sprites))
 
         #   collisions
         for x, y, surf in main_map.get_layer_by_name("collisions").tiles():
@@ -127,7 +122,10 @@ class Level:
             self.collision_sprites.custom_draw(offset, self.characters)
             self.show_fps(dt)
 
-        self.current_player.input()
+        self.prev_keys = self.keys
+        self.keys = pygame.key.get_pressed()
+
+        self.current_player.input(self.keys, self.prev_keys)
         self.all_sprites.update(dt)
 
 
