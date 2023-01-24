@@ -8,7 +8,11 @@ class Menu:
 		self.display_surface = pygame.display.get_surface()
 		self.background = pygame.image.load("../smth.png").convert_alpha()
 		self.background = pygame.transform.rotozoom(self.background, 0, SCREEN_WIDTH/1920)
-		
+
+		self.sound = pygame.mixer.Sound("../audio/Cicada_menu_sound.mp3")
+		self.sound.set_volume(0.1)
+		self.sound.play(loops=-1)
+
 		self.buttons = [
 		Button("Singleplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 120),
 			self.switch_off),
@@ -18,6 +22,7 @@ class Menu:
 
 	def switch_off(self):
 		self.active = False
+		self.sound.stop()
 
 	def run(self):
 		self.display_surface.blit(self.background, (0,0))

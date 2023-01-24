@@ -20,6 +20,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.level = Level()
         self.menu = Menu()
+        
 
     def run(self):
         previous_time = time.time() - 1
