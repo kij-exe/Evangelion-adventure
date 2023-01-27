@@ -41,6 +41,14 @@ class Level:
                 groups=self.all_sprites,
                 z=LAYERS["main"])
 
+        #   building side lighters
+        for x, y, surf in main_map.get_layer_by_name("building_side").tiles():
+            Generic_sprite(
+                pos=(x * 64, (y+1) * 64),
+                surf=surf,
+                groups=self.all_sprites,
+                z=LAYERS["rain drops"])
+
         input_functions = {
         "toggle_debug_mode": self.toggle_debug_mode,
         "switch_player": self.switch_player
