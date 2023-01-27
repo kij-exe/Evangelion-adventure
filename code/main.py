@@ -36,7 +36,7 @@ class Game:
                         self.menu.switch_off()
 
             if self.menu.active:
-                self.menu.run()
+                self.menu.run(dt)
             else:
                  self.level.run(dt)
 

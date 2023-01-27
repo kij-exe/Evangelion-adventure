@@ -1,7 +1,7 @@
 Go to code and open main.py to start the game
 If there is an error, try to type into powershell "pip install pygame --pre"
 This error occurs with the new version of Python
-If this did not help, try to open it with some IDE (e.g., IDLE)
+If this did not help, try to open the game with some IDE (e.g., IDLE)
 
 The game does not suggest many plot or playability, 
 however I tried to implement some mechanics that might be interesting further:

@@ -1,13 +1,15 @@
 import pygame
 from config import *
+from support import import_folder
 
 class Menu:
 	def __init__(self):
 		#	general setup
 		self.active = True
 		self.display_surface = pygame.display.get_surface()
-		self.background = pygame.image.load("../smth.png").convert_alpha()
-		self.background = pygame.transform.rotozoom(self.background, 0, SCREEN_WIDTH/1920)
+		self.background = pygame.image.load("../menu_pic.png").convert_alpha()
+		scale = SCREEN_WIDTH/1920
+		self.background = pygame.transform.rotozoom(self.background, 0, scale)
 
 		self.sound = pygame.mixer.Sound("../audio/Cicada_menu_sound.mp3")
 		self.sound.set_volume(0.1)
@@ -17,17 +19,28 @@ class Menu:
 		Button("Singleplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 120),
 			self.switch_off),
 		Button("Multiplayer", 450, 50, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 50),
-			print, "not finished yet")
+			self.toggle_tree)
 		]
+
+		self.tree = EasterEgg(536, 186, scale)
+		self.group_single = pygame.sprite.GroupSingle(self.tree)
+		self.tree_active = True
 
 	def switch_off(self):
 		self.active = False
 		self.sound.stop()
 
-	def run(self):
+	def toggle_tree(self):
+		self.tree_active = not self.tree_active
+
+	def run(self, dt):
 		self.display_surface.blit(self.background, (0,0))
 		for button in self.buttons:
 			button.update(self.display_surface)
+
+		if self.tree_active:
+			self.group_single.update(dt)
+			self.group_single.draw(self.display_surface)
 
 class Button:
 	def __init__(self, text, width, height, pos, func, *args):
@@ -85,3 +98,27 @@ class Button:
 		else:
 			self.actual_shift = self.shift
 			self.top_colour = "#222228"
+
+class EasterEgg(pygame.sprite.Sprite):
+	def __init__(self, x, y, scale):
+		super().__init__()
+		self.frame_index = 0
+
+	
+		self.frames = []
+		path = "../graphics/easter_egg"
+		self.frames = import_folder(path)
+		for index, frame in enumerate(self.frames):
+			self.frames[index] = pygame.transform.rotozoom(frame, 0, 0.35 * scale)
+
+		self.image = self.frames[self.frame_index]
+		self.rect = self.image.get_rect(center=(x * scale, y * scale))
+
+	def animate(self, dt):
+		self.frame_index += 25 * dt
+		if self.frame_index >= len(self.frames): self.frame_index = 0
+		self.image = self.frames[int(self.frame_index)]
+
+	def update(self, dt):
+		self.animate(dt)
+
