@@ -24,7 +24,7 @@ class Menu:
 
 		self.tree = EasterEgg(536, 186, scale)
 		self.group_single = pygame.sprite.GroupSingle(self.tree)
-		self.tree_active = True
+		self.tree_active = False
 
 	def switch_off(self):
 		self.active = False
